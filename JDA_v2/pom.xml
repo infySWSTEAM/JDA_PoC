@@ -36,7 +36,7 @@
 		<artifactId>ojdbc</artifactId>
 		<version>8</version>
 		<scope>system</scope>
-		<systemPath>C:\Program Files\OJDBC\ojdbc8.jar</systemPath>
+		<systemPath>${project.basedir}/Drivers/ojdbc8.jar</systemPath>
 	</dependency>
     
     <dependency>

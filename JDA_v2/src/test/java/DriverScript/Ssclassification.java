@@ -85,8 +85,6 @@ public class Ssclassification  extends DififoReportSetup{
 		int rowMax = exfile.getTotalRowColumn(testScenarioFilePath,testCaseFileName,testdatasheet);
 		
 		report.log("No of Ultimate Parent provided by the user: "+ rowMax );
-		
-		System.out.println(rowMax);
 		for (int i=1;i<=rowMax;i++)
 		{	
 		String Item = fetchItemNumber(testScenarioFilePath,testCaseFileName,testdatasheet,i,0);
@@ -113,8 +111,7 @@ public class Ssclassification  extends DififoReportSetup{
 		testdatasheet = envProp.getProperty("testdatasheet");
 		
 		int rowMax = exfile.getTotalRowColumn(testScenarioFilePath,testCaseFileName,testdatasheet);
-		System.out.println(rowMax);
-		
+
 		report.log("No of Ultimate Parent provided by the user: "+ rowMax );
 
 		for (int i=1;i<=rowMax;i++)
@@ -179,7 +176,6 @@ public class Ssclassification  extends DififoReportSetup{
 		int rowMax1 = exfile.getTotalRowColumn(testScenarioFilePath, inputDatafromDBFileName, Externaldata);
 		report.log("No of records in Ext Supersession table for the given ultimate Parent: "+ rowMax1 );
 
-		System.out.println(rowMax1);
 		for (int i=1;i<=rowMax1;i++)
 		{	
 		String FromItem = fetchItemNumber(testScenarioFilePath,inputDatafromDBFileName,Externaldata,i,0);
