@@ -151,7 +151,7 @@ public class JDA extends DififoReportSetup{
 		driver.switchTo().frame("appFrame");
 		ps.clickdone();
 		report.log("Search Results from UI");
-		Thread.sleep(5000);  
+		Thread.sleep(10000);  
 		driver.switchTo().defaultContent();
 		Screenshot("PIM_Supersession records in UI");
 		Thread.sleep(2000);  
