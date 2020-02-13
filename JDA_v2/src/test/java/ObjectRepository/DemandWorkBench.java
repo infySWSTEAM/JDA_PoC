@@ -1,3 +1,11 @@
+///************************************************************************************************************************
+//		Author           : SGWS JDA Team 
+//		Last Modified by : Anushya Karunakaran
+//		Last Modified on : 13-Feb-2020
+//		Summary 		 : SQL Validations for SS Classification Rejection scenarios
+//
+//************************************************************************************************************************/
+
 package ObjectRepository;
 
 import java.io.IOException;

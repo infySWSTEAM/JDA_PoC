@@ -1,3 +1,11 @@
+///************************************************************************************************************************
+//		Author           : SGWS JDA Team 
+//		Last Modified by : Nivedha Ravichandran
+//		Last Modified on : 13-Feb-2020
+//		Summary 		 : SQL Validations for SS Classification Rejection scenarios
+//
+//************************************************************************************************************************/
+
 package DriverScript;
 
 import java.io.FileInputStream;
@@ -56,7 +64,7 @@ public class Ssclassification  extends DififoReportSetup{
 		Externaldata = envProp.getProperty("Externaldata");
 		skuData = envProp.getProperty("SKUData");
 		
-		report.log("Clearing the Excel File");
+		report.log("Clearing the Last run results from DB.xlsx - all sheets");
 		
 		for(int i=0;i<=10;i++)
 		{

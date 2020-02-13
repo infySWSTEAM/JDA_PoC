@@ -1,3 +1,11 @@
+///************************************************************************************************************************
+//		Author           : SGWS JDA Team 
+//		Last Modified by : Prema Kothandaraman
+//		Last Modified on : 13-Feb-2020
+//		Summary 		 : JDA UI Automation scripts for pages Demand Workbench, PIM_Supersession and Supersession
+//
+//************************************************************************************************************************/
+
 package DriverScript;
 
 import java.io.File;
@@ -28,7 +36,6 @@ public class JDA extends DififoReportSetup{
 	WebDriver driver = null;
 	ExcelFile exf = null;
 	
-	
 	String url;
 	String testScenarioFilePath;
 	String testCaseFileName;
@@ -42,8 +49,6 @@ public class JDA extends DififoReportSetup{
 	{
 		File file=((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 		report.addImage(file, Filename);
-		//String timestamp =new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
-		//FileUtils.copyFile(file, new File(System.getProperty("user.dir")+"//Screenshots//"+ timestamp + Filename +"_" +".jpg"));
 	}	
 	
 	@BeforeMethod
@@ -66,12 +71,6 @@ public class JDA extends DififoReportSetup{
 		driver.get(url);
 		Thread.sleep(3000);
 		driver.manage().window().maximize();
-		/*DataBase db= new DataBase();
-		InputStream queryPropInput = new FileInputStream("./DB Query\\Query1.properties");
-		Properties queryProp = new Properties();
-		queryProp.load(queryPropInput);
-		String Query = queryProp.getProperty("SupersessionQuery");
-		db.dbConnection(Query);*/
 		driver.switchTo().activeElement();
 		LoginPage lp= new LoginPage(driver);
 		Thread.sleep(1000);
@@ -121,8 +120,7 @@ public class JDA extends DififoReportSetup{
 		Screenshot("Supersession records in UI");
 		Thread.sleep(5000);
 		hp.clr();
-/*		driver.manage().deleteAllCookies();
-*/	}
+	}
 }
 
 	

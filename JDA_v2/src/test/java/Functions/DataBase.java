@@ -1,3 +1,11 @@
+///************************************************************************************************************************
+//		Author           : SGWS JDA Team 
+//		Last Modified by : Anushya Karunakaran
+//		Last Modified on : 13-Feb-2020
+//		Summary 		 : SQL Validations for SS Classification Rejection scenarios
+//
+//************************************************************************************************************************/
+
 package Functions;
 
 import java.io.File;
@@ -95,7 +103,6 @@ public class DataBase extends DififoReportSetup {
 		rowhead1.createCell((short) 5).setCellValue("SITE");
 			
 		int rowmax=sheet2.getLastRowNum();
-		//System.out.println("Ext lastrow"+rowmax);
 		int i=rowmax+1;
 		while (resSet.next())
 		{		
@@ -118,7 +125,6 @@ public class DataBase extends DififoReportSetup {
 		
 		Connection con=DriverManager.getConnection(connectionURL,userName,pass);
 		Statement stmt=con.createStatement();
-		//System.out.println(Query);
 		report.log(Query);
 		ResultSet resSet = stmt.executeQuery(Query);
 		Sheet sheet2 = workbook.getSheet("ExtSupersession");
@@ -132,8 +138,6 @@ public class DataBase extends DififoReportSetup {
 		}
 		else
 		{
-			//String Itemnum = resSet.getString("Item");
-			//System.out.println("old item is" + Itemnum);
 			Row row = sheet2.getRow((short) i);
 			row.createCell((short) 6).setCellValue("");
 						
@@ -148,7 +152,6 @@ public class DataBase extends DififoReportSetup {
 		dbopen();
 		Connection con=DriverManager.getConnection(connectionURL,userName,pass);
 		Statement stmt=con.createStatement();
-		//System.out.println(Query);
 		report.log(Query);
 		ResultSet resSet = stmt.executeQuery(Query);
 		Sheet sheet2 = workbook.getSheet("ExtSupersession");
@@ -163,8 +166,6 @@ public class DataBase extends DififoReportSetup {
 		}
 		else 
 		{
-			//String Itemnum1 = resSet.getString("Item");
-			//System.out.println("New item is" + Itemnum1);
 			Row row = sheet2.getRow((short) i);
 			row.createCell((short) 7).setCellValue("");
 		}
@@ -267,7 +268,6 @@ public class DataBase extends DififoReportSetup {
 				
 		Cell rej_rsn1=sheet3.getRow(j).getCell(3);
 		String rej_rsn = rej_rsn1.getStringCellValue();
-		
 		
 		
 		if (der_rsn.isEmpty()) 

@@ -10,5 +10,5 @@
      <classes>
        <class name="DriverScript.Ssclassification"/>
     </classes>
-  </test> <!-- Test -->
+  </test>
 </suite> <!-- Suite -->

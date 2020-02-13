@@ -1,3 +1,11 @@
+///************************************************************************************************************************
+//		Author           : SGWS JDA Team 
+//		Last Modified by : Anushya Karunakaran
+//		Last Modified on : 13-Feb-2020
+//		Summary 		 : SQL Validations for SS Classification Rejection scenarios
+//
+//************************************************************************************************************************/
+
 package ObjectRepository;
 
 import java.io.IOException;
@@ -12,8 +20,7 @@ public class Supersession {
 	
 	WebDriver driver = null;
 	ExcelFile exfile = new ExcelFile();
-	WebDriverWait wait = null;
-	
+	WebDriverWait wait = null;	
 	String InputItem;
 	String InputLocation;
 	By Dropdown = By.xpath("//*[@id='directory']//span[@title='Supersession']");
@@ -22,7 +29,7 @@ public class Supersession {
     By Done =By.xpath("//span[@id='PromptScreenPopup_doneBtnOn']/div/a/div/div[@class='j-button-fill']/span[text()='Done']");
     By Clear =By.xpath("//*[@id='PromptScreenPopup_clearOn']/div/div/span");
 
-            
+           
     public Supersession(WebDriver driver){
 
         this.driver = driver;

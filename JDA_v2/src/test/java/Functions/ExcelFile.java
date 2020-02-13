@@ -1,3 +1,11 @@
+///************************************************************************************************************************
+//		Author           : SGWS JDA Team 
+//		Last Modified by : Anushya Karunakaran
+//		Last Modified on : 13-Feb-2020
+//		Summary 		 : SQL Validations for SS Classification Rejection scenarios
+//
+//************************************************************************************************************************/
+
 package Functions;
 
 import java.io.File;
@@ -16,7 +24,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class ExcelFile {
 	
-	//Read Data from Excel Sheet
+	//***Read Data from Excel Sheet***//
 	public String readExcel(String filePath, String fileName, String sheetName, int rownum, int columnnum) throws IOException {
 		
 		int rownm = rownum;
@@ -45,7 +53,7 @@ public class ExcelFile {
 		return cellValue;
 	}
 	
-	//Write Data to Excel Sheet
+	//***Write Data to Excel Sheet***//
 	public void writeExcel(String filePath, String fileName, String sheetName, String dataToWrite, int rw, int col) throws IOException {
 		File file = new File(filePath+"\\"+fileName);
 		FileInputStream fis = new FileInputStream(file);
@@ -71,7 +79,7 @@ public class ExcelFile {
 		fos.close();
 	}
 	
-	//Get Total no of rows & Columns in an Excel Sheet
+	//***Get Total no of rows & Columns in an Excel Sheet***//
 	public int getTotalRowColumn(String filePath, String fileName, String sheetName) throws IOException, InterruptedException {
 		File file = new File(filePath+"\\"+fileName);
 		FileInputStream fis = new FileInputStream(file);
@@ -105,6 +113,7 @@ public class ExcelFile {
 		return rowMax;
 	}
 	
+	//***To clear a particular column***//
 	public void ClearCell(String filePath, String fileName, String sheetName, int col) throws IOException {
 		File file = new File(filePath+"\\"+fileName);
 		FileInputStream fis = new FileInputStream(file);
@@ -127,8 +136,6 @@ public class ExcelFile {
 			
 			Row row = sheet.getRow(i);
 			sheet.removeRow(row);
-			//Cell cell = row.getCell(col);
-			//cell.setCellValue(" ");
 		}
 		fis.close();
 
