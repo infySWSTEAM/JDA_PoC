@@ -11,4 +11,9 @@
        <class name="DriverScript.Ssclassification"/>
     </classes>
   </test>
+  <test name="SS_CLASSIFICATION_VALIDATIONS">
+     <classes>
+       <class name="DriverScript.snapshots"/>
+    </classes>
+  </test>
 </suite> <!-- Suite -->
