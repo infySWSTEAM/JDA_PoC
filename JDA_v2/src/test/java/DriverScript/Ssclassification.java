@@ -32,6 +32,7 @@ public class Ssclassification  extends DififoReportSetup{
 	String inputDatafromDBFileName;
 	String skuData;
 	String PIMdata;
+	String Inputsheet;
 	
 	ExcelFile exfile = new ExcelFile();
 	
@@ -60,9 +61,11 @@ public class Ssclassification  extends DififoReportSetup{
 				
 		testScenarioFilePath = envProp.getProperty("testScenarioFilePath");
 		inputDatafromDBFileName = envProp.getProperty("inputDatafromDBFileName");
+		testCaseFileName = envProp.getProperty("testCaseFileName");
 		PIMdata = envProp.getProperty("PIMdata");
 		Externaldata = envProp.getProperty("Externaldata");
 		skuData = envProp.getProperty("SKUData");
+		Inputsheet = envProp.getProperty("testdatasheet");
 		
 		report.log("Clearing the Last run results from DB.xlsx - all sheets");
 		
@@ -71,14 +74,35 @@ public class Ssclassification  extends DififoReportSetup{
 		exfile.ClearCell(testScenarioFilePath, inputDatafromDBFileName, PIMdata, i);
 		exfile.ClearCell(testScenarioFilePath, inputDatafromDBFileName, Externaldata, i);
 		exfile.ClearCell(testScenarioFilePath, inputDatafromDBFileName, skuData, i);
+		exfile.ClearCell(testScenarioFilePath, testCaseFileName, Inputsheet, i);
 		}
 		}
 		catch(Exception e) {
 			return;
 		}
-	}
+	}	
 	
 	@Test(priority=0)
+		public void testData() throws IOException, SQLException {
+			InputStream envPropInput = new FileInputStream("./Environment\\Environment.properties");
+			Properties envProp = new Properties();
+			envProp.load(envPropInput);
+			
+			testScenarioFilePath = envProp.getProperty("testScenarioFilePath");
+			testCaseFileName = envProp.getProperty("testCaseFileName");
+			testdatasheet = envProp.getProperty("testdatasheet");
+			System.out.println("hello");
+			DataBase db= new DataBase();
+			InputStream queryPropInput = new FileInputStream("./DB Query\\Query1.properties");
+			Properties queryProp = new Properties();
+			queryProp.load(queryPropInput);
+			String Query = queryProp.getProperty("JDAtestinput");
+			String Query1 = queryProp.getProperty("JDAtestinput1");
+			db.dbJDATestInput(Query + Query1);
+		}
+	
+	
+	@Test(priority=1)
 	public void dbPIMSupersession() throws IOException, SQLException, InterruptedException 
 	{
 		
@@ -107,7 +131,7 @@ public class Ssclassification  extends DififoReportSetup{
 		}
 	}
 	
-	@Test(priority=1)
+	@Test(priority=2)
 	public void dbExtSupersession() throws IOException, SQLException, InterruptedException {
 		
 		InputStream envPropInput = new FileInputStream("./Environment\\Environment.properties");
@@ -135,7 +159,7 @@ public class Ssclassification  extends DififoReportSetup{
 		}
 	}
 		
-	@Test(priority=2)
+	@Test(priority=3)
 		public void dbSKU() throws IOException, SQLException, InterruptedException 
 		{
 	        
@@ -170,7 +194,7 @@ public class Ssclassification  extends DififoReportSetup{
 
 
    }
-	@Test(priority=3)
+	@Test(priority=4)
 	public void dbSKUReject() throws IOException, SQLException, InterruptedException 
 	{        
 		InputStream envPropInput = new FileInputStream("./Environment\\Environment.properties");
@@ -200,7 +224,7 @@ public class Ssclassification  extends DififoReportSetup{
 		}	
 		}
 	
-	@Test(priority=4)
+	@Test(priority=5)
 	public void dbCompare() throws IOException, SQLException, InterruptedException 
 	{        
 		InputStream envPropInput = new FileInputStream("./Environment\\Environment.properties");

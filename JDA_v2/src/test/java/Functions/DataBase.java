@@ -79,11 +79,53 @@ public class DataBase extends DififoReportSetup {
 					System.out.println("Info: clean sheet='");
 				}
 			}
-		} else {
-			System.out.println("chumma");
-		}
+		} 
 	}
 	
+	public void dbJDATestInput(String Query) throws SQLException, IOException {
+		
+		
+		InputStream input = new FileInputStream("./Environment\\Environment.properties");
+		Properties prop = new Properties();
+		prop.load(input);
+		testDataFilePath = prop.getProperty("testDataFilePath")+"\\"+prop.getProperty("testCaseFileName");
+		connectionURL=prop.getProperty("ConnectionURL");
+		userName=prop.getProperty("DBUserName");
+		pass= prop.getProperty("DBPass");
+		
+		File  file = new File(testDataFilePath);
+		FileInputStream inputfile = new FileInputStream(file);
+		workbook = new XSSFWorkbook(inputfile);
+		 
+		Connection con=DriverManager.getConnection(connectionURL,userName,pass);
+		Statement stmt=con.createStatement();
+		
+		report.log(Query);
+		
+		ResultSet resSet = stmt.executeQuery(Query);
+				
+		Sheet sheet1 = workbook.getSheet("TestData");
+		System.out.println(sheet1);
+		Row rowhead = sheet1.createRow((short) 0);
+		rowhead.createCell((short) 0).setCellValue("Item");
+		rowhead.createCell((short) 1).setCellValue("Location");
+		rowhead.createCell((short) 2).setCellValue("Dmdgrp");
+		
+		
+		int rowmax=sheet1.getLastRowNum();
+		int i=rowmax+1;
+		while (resSet.next())
+		{		
+			Row row = sheet1.createRow((short) i++);
+			row.createCell((short) 0).setCellValue(resSet.getString("Item"));
+			row.createCell((short) 1).setCellValue(resSet.getString("Location"));
+			row.createCell((short) 2).setCellValue(resSet.getString("Dmdgrp"));
+							
+			}
+		FileOutputStream fileOut = new FileOutputStream(testDataFilePath);
+		workbook.write(fileOut);
+		con.close();
+	}
 	
 	public void dbPIMSupersessionConn(String Query) throws SQLException, IOException
 	{
@@ -120,6 +162,7 @@ public class DataBase extends DififoReportSetup {
 			}
 		FileOutputStream fileOut = new FileOutputStream(testDataFilePath);
 		workbook.write(fileOut);
+		con.close();
 	}
 	
 	public void dbExtSupersessionConn(String Query) throws SQLException, IOException
@@ -155,6 +198,7 @@ public class DataBase extends DififoReportSetup {
 				
 		FileOutputStream fileOut = new FileOutputStream(testDataFilePath);
 		workbook.write(fileOut);
+		con.close();
 	}
 	public void oldSkuCheck(String Query,String OldItem, int i) throws IOException, SQLException 
 	{
@@ -181,13 +225,16 @@ public class DataBase extends DififoReportSetup {
 		}
 		
 		FileOutputStream fileOut = new FileOutputStream(testDataFilePath);
-		workbook.write(fileOut);	
+		workbook.write(fileOut);
+		con.close();
 	}
 	
-	public void newSkuCheck(String Query,String NewItem, int i) throws IOException, SQLException 
+	public void newSkuCheck(String Query,String NewItem, int i) throws IOException, SQLException, InterruptedException 
 	{
 		dbopen();
+		Thread.sleep(5000);
 		Connection con=DriverManager.getConnection(connectionURL,userName,pass);
+		Thread.sleep(5000);
 		Statement stmt=con.createStatement();
 		report.log(Query);
 		ResultSet resSet = stmt.executeQuery(Query);
@@ -208,6 +255,7 @@ public class DataBase extends DififoReportSetup {
 		}
 		FileOutputStream fileOut = new FileOutputStream(testDataFilePath);
 		workbook.write(fileOut);	
+		con.close();
 	}
 	
 	public void cellMerge(int i) throws IOException
@@ -237,10 +285,12 @@ public class DataBase extends DififoReportSetup {
 
 		
 	}
-	public void dbSkuRejection(String Query) throws SQLException, IOException
+	public void dbSkuRejection(String Query) throws SQLException, IOException, InterruptedException
 	{
 		dbopen();
+		Thread.sleep(5000);
 		Connection con=DriverManager.getConnection(connectionURL,userName,pass);
+		Thread.sleep(5000);
 		Statement stmt=con.createStatement();
 		report.log(Query);
 		ResultSet resSet = stmt.executeQuery(Query);
@@ -267,7 +317,7 @@ public class DataBase extends DififoReportSetup {
 				
 		FileOutputStream fileOut = new FileOutputStream(testDataFilePath);
 		workbook.write(fileOut);
-		
+		con.close();
 	}
 	
 	public void rejectioncompare(int i,int j) throws IOException, SQLException
@@ -321,6 +371,7 @@ public class DataBase extends DififoReportSetup {
 		}
 		FileOutputStream fileOut = new FileOutputStream(testDataFilePath);
 		workbook.write(fileOut);
+		
 	}
 				
 		public void invalidData(int i,int j) throws IOException, SQLException
@@ -376,6 +427,7 @@ public class DataBase extends DififoReportSetup {
 					
 			FileOutputStream fileOut = new FileOutputStream(snapShotFilePath);
 			workbook.write(fileOut);
+			con.close();
 		}
 		
 		
@@ -474,6 +526,7 @@ public class DataBase extends DififoReportSetup {
 			}
 			FileOutputStream fileOut = new FileOutputStream(snapShotFilePath);
 			workbook.write(fileOut);
+			con.close();
 		}
 		
 		public void DFU_DDE_SUPSValid(String Query) throws SQLException, IOException
@@ -525,6 +578,7 @@ public class DataBase extends DififoReportSetup {
 					
 			FileOutputStream fileOut = new FileOutputStream(snapShotFilePath);
 			workbook.write(fileOut);
+			con.close();
 		}
 		
 		public void DFU_Validation(String Query) throws SQLException, IOException
@@ -603,6 +657,7 @@ public class DataBase extends DififoReportSetup {
 			}	
 			FileOutputStream fileOut = new FileOutputStream(snapShotFilePath);
 			workbook.write(fileOut);
+			con.close();
 		}
 		
 		public void DFU_SUPSValidation(String Query) throws SQLException, IOException
@@ -646,6 +701,7 @@ public class DataBase extends DififoReportSetup {
 					
 			FileOutputStream fileOut = new FileOutputStream(snapShotFilePath);
 			workbook.write(fileOut);
+			con.close();
 		}
 		
 		public void Eventmap_Validation(String Query) throws SQLException, IOException
@@ -704,6 +760,7 @@ public class DataBase extends DififoReportSetup {
 			}	
 			FileOutputStream fileOut = new FileOutputStream(snapShotFilePath);
 			workbook.write(fileOut);
+			con.close();
 		}
 		
 		public void Eventmap_SUPSValidation(String Query) throws SQLException, IOException
@@ -736,6 +793,7 @@ public class DataBase extends DififoReportSetup {
 					
 			FileOutputStream fileOut = new FileOutputStream(snapShotFilePath);
 			workbook.write(fileOut);
+			con.close();
 		}
 		
 		
@@ -819,6 +877,7 @@ public class DataBase extends DififoReportSetup {
 			}	
 			FileOutputStream fileOut = new FileOutputStream(snapShotFilePath);
 			workbook.write(fileOut);
+			con.close();
 		}
 		
 		public void DFUDDE_SUPSValidation(String Query) throws SQLException, IOException
@@ -863,6 +922,7 @@ public class DataBase extends DififoReportSetup {
 					
 			FileOutputStream fileOut = new FileOutputStream(snapShotFilePath);
 			workbook.write(fileOut);
+			con.close();
 		}
 		
 		public void DFUEFF_Validation(String Query) throws SQLException, IOException
@@ -921,6 +981,7 @@ public class DataBase extends DififoReportSetup {
 			}	
 			FileOutputStream fileOut = new FileOutputStream(snapShotFilePath);
 			workbook.write(fileOut);
+			con.close();
 		}
 		
 		public void DFUEFF_SUPSValidation(String Query) throws SQLException, IOException
@@ -953,6 +1014,7 @@ public class DataBase extends DififoReportSetup {
 					
 			FileOutputStream fileOut = new FileOutputStream(snapShotFilePath);
 			workbook.write(fileOut);
+			con.close();
 		}
 		
 		public void FCST_Validation(String Query) throws SQLException, IOException
@@ -1035,6 +1097,7 @@ public class DataBase extends DififoReportSetup {
 			}	
 			FileOutputStream fileOut = new FileOutputStream(snapShotFilePath);
 			workbook.write(fileOut);
+			con.close();
 		}
 		
 		public void FCST_SUPSValidation(String Query) throws SQLException, IOException
@@ -1079,6 +1142,7 @@ public class DataBase extends DififoReportSetup {
 					
 			FileOutputStream fileOut = new FileOutputStream(snapShotFilePath);
 			workbook.write(fileOut);
+			con.close();
 		}
 		
 		public void LEWAND_Validation(String Query) throws SQLException, IOException
@@ -1213,6 +1277,7 @@ public class DataBase extends DififoReportSetup {
 			}	
 			FileOutputStream fileOut = new FileOutputStream(snapShotFilePath);
 			workbook.write(fileOut);
+			con.close();
 		}
 		
 		public void LEWAND_SUPSValidation(String Query) throws SQLException, IOException
@@ -1283,6 +1348,7 @@ public class DataBase extends DififoReportSetup {
 					
 			FileOutputStream fileOut = new FileOutputStream(snapShotFilePath);
 			workbook.write(fileOut);
+			con.close();
 		}
 		
 		public void Meanvalue_Validation(String Query) throws SQLException, IOException
@@ -1372,6 +1438,7 @@ public class DataBase extends DififoReportSetup {
 			}	
 			FileOutputStream fileOut = new FileOutputStream(snapShotFilePath);
 			workbook.write(fileOut);
+			con.close();
 		}
 		
 		public void Meanvalue_SUPSValidation(String Query) throws SQLException, IOException
@@ -1420,6 +1487,7 @@ public class DataBase extends DififoReportSetup {
 					
 			FileOutputStream fileOut = new FileOutputStream(snapShotFilePath);
 			workbook.write(fileOut);
+			con.close();
 		}
 		
 		public void targetdfu_Validation(String Query) throws SQLException, IOException
@@ -1482,6 +1550,7 @@ public class DataBase extends DififoReportSetup {
 			}	
 			FileOutputStream fileOut = new FileOutputStream(snapShotFilePath);
 			workbook.write(fileOut);
+			con.close();
 		}
 		
 		public void targetdfu_SUPSValidation(String Query) throws SQLException, IOException
@@ -1516,6 +1585,7 @@ public class DataBase extends DififoReportSetup {
 					
 			FileOutputStream fileOut = new FileOutputStream(snapShotFilePath);
 			workbook.write(fileOut);
+			con.close();
 		}
 		public void minusquery1(String Query, String Sheet1) throws SQLException, IOException
 		{
@@ -1540,6 +1610,7 @@ public class DataBase extends DififoReportSetup {
 			
 			FileOutputStream fileOut = new FileOutputStream(snapShotFilePath);
 			workbook.write(fileOut);
+			con.close();
 		}
 
 		

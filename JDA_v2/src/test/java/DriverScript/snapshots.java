@@ -101,8 +101,8 @@ public class snapshots extends DififoReportSetup{
 		report.log("No of Test data provided by the user for validating Snapshots: "+ rowMax );
 		for (int i=1;i<=rowMax;i++)
 		{
-		//String FromItem = fetchItemNumber(testScenarioFilePath,testCaseFileName,testdatasheet,i,0);
-		//String LOC = fetchLocationNumber(testScenarioFilePath,testCaseFileName,testdatasheet,i,2);
+		//String FromItem = fetchItemNumber(testScenarioFilePath,testCaseFileName,InputfromWIP,i,0);
+		//String LOC = fetchLocationNumber(testScenarioFilePath,testCaseFileName,InputfromWIP,i,2);
 		
 		DataBase db= new DataBase();
 		InputStream queryPropInput = new FileInputStream("./DB Query\\Query1.properties");

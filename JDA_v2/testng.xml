@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Suite">
+  <test name="SS_CLASSIFICATION_VALIDATIONS">
+     <classes>
+       <class name="DriverScript.Ssclassification"/>
+    </classes>
+  </test>
   <test name="JDA_UI_AUTOMATION">
     <classes>
        <class name="DriverScript.JDA"/>
     </classes>
    </test>
-   <test name="SS_CLASSIFICATION_VALIDATIONS">
-     <classes>
-       <class name="DriverScript.Ssclassification"/>
-    </classes>
-  </test>
-  <test name="SS_CLASSIFICATION_VALIDATIONS">
+  <test name="SNAPSHOTS_VALIDATIONS">
      <classes>
        <class name="DriverScript.snapshots"/>
     </classes>
-  </test>
+  </test> 
 </suite> <!-- Suite -->
